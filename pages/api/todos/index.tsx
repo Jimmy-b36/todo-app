@@ -2,23 +2,33 @@ import { prisma } from '../../../db';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log('TODOS');
-
+  if (req.method === 'DELETE') {
+    console.log('deleted body', req.body);
+    const { id } = JSON.parse(req.body);
+    const deleted = await prisma.tasks.delete({
+      where: {
+        id: Number(id),
+      },
+    });
+    return res.json('deleted');
+  }
   if (req.method === 'PATCH') {
     const { id, completed } = JSON.parse(req.body);
-
-    console.log(req.body);
+    console.log('id', id);
+    console.log('completed', completed);
 
     const updateTodo = await prisma.tasks.update({
       where: {
         id: Number(id),
       },
       data: {
-        completed: true,
+        completed: completed ? true : false,
       },
     });
+    console.log('updateTodo', updateTodo);
     return res.json(updateTodo);
   }
+
   if (req.method === 'POST') {
     const { name, completed, description } = JSON.parse(req.body);
     const createTodo = await prisma.tasks.create({
@@ -30,12 +40,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
     return res.json(createTodo);
   }
+
   if (req.method === 'GET') {
-    const todos = await prisma.tasks.findMany({
-      where: {
-        completed: false,
-      },
-    });
+    const todos = await prisma.tasks.findMany();
     return res.json(todos);
   }
 
