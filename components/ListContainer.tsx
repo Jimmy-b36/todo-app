@@ -2,6 +2,7 @@ import useSWR from 'swr';
 import { Key, useEffect, useState } from 'react';
 import TodoCreator from '../components/TodoCreation';
 import CompletedTasks from '../components/CompletedTasks';
+import { uncompletedTasks } from '../lib/taskSorter';
 
 interface IListContainerProps {
   map: any;
@@ -15,9 +16,8 @@ const ListContainer = () => {
   const [data, setData] = useState<IListContainerProps | null>(null);
   const fetchTodos = async () => {
     const res = await fetch(`http://localhost:3000/api/todos`);
-    const data = await res.json();
+    let data = await res.json();
     setData(data);
-    console.log(data);
   };
 
   useEffect(() => {
@@ -25,13 +25,13 @@ const ListContainer = () => {
   }, []);
 
   const onChangeHandler = async (e: any, id: string) => {
-    console.log(e.target.value);
     e.preventDefault();
     const idData = Number(e.target.value);
+    const completedData = e.target.checked;
 
     const res = await fetch(`api/todos`, {
       method: 'PATCH',
-      body: JSON.stringify({ id: idData, completed: true }),
+      body: JSON.stringify({ id: idData, completed: completedData }),
     });
     fetchTodos();
   };
@@ -44,9 +44,14 @@ const ListContainer = () => {
       <div className="flex justify-center">
         <ul>
           <h1 className="text-4xl">List container</h1>
-          {data?.map(
+          {uncompletedTasks(data)?.map(
             (
-              todo: { name: string; description: string; id: number },
+              todo: {
+                name: string;
+                description: string;
+                id: number;
+                completed: boolean;
+              },
               index: Key
             ) => (
               <div key={index} className="flex flex-row">
@@ -58,6 +63,7 @@ const ListContainer = () => {
                 <input
                   type="checkbox"
                   name="todoComplete"
+                  checked={todo.completed}
                   value={todo.id}
                   id="todoComplete"
                   onChange={onChangeHandler}
@@ -67,7 +73,11 @@ const ListContainer = () => {
           )}
         </ul>
       </div>
-      <CompletedTasks />
+      <CompletedTasks
+        tasks={data}
+        onChangeHandler={onChangeHandler}
+        fetchTodos={fetchTodos}
+      />
     </div>
   );
 };
