@@ -2,21 +2,14 @@ import useSWR from 'swr';
 import { Key, useEffect, useState } from 'react';
 import TodoCreator from '../components/TodoCreation';
 import CompletedTasks from '../components/CompletedTasks';
-import { uncompletedTasks } from '../lib/taskSorter';
-
-interface IListContainerProps {
-  map: any;
-  data: {
-    name: string;
-    description: string;
-  }[];
-}
+import UncompletedTasks from './unCompletedTasks';
+import { Tasks } from '@prisma/client';
 
 const ListContainer = () => {
-  const [data, setData] = useState<IListContainerProps | null>(null);
+  const [data, setData] = useState<Array<Tasks>>([]);
   const fetchTodos = async () => {
     const res = await fetch(`http://localhost:3000/api/todos`);
-    let data = await res.json();
+    let data: Array<Tasks> = await res.json();
     setData(data);
   };
 
@@ -24,7 +17,7 @@ const ListContainer = () => {
     fetchTodos();
   }, []);
 
-  const onChangeHandler = async (e: any, id: string) => {
+  const onChangeHandler = async (e: any) => {
     e.preventDefault();
     const idData = Number(e.target.value);
     const completedData = e.target.checked;
@@ -41,38 +34,8 @@ const ListContainer = () => {
       <div className="flex justify-center m-5">
         <TodoCreator fetchTodos={fetchTodos} />
       </div>
-      <div className="flex justify-center">
-        <ul>
-          <h1 className="text-4xl">List container</h1>
-          {uncompletedTasks(data)?.map(
-            (
-              todo: {
-                name: string;
-                description: string;
-                id: number;
-                completed: boolean;
-              },
-              index: Key
-            ) => (
-              <div key={index} className="flex flex-row">
-                <h2 className="m-2 w-max">
-                  {' '}
-                  <strong>{todo.name}</strong>{' '}
-                </h2>
-                <p className="m-2">{todo.description}</p>
-                <input
-                  type="checkbox"
-                  name="todoComplete"
-                  checked={todo.completed}
-                  value={todo.id}
-                  id="todoComplete"
-                  onChange={onChangeHandler}
-                />
-              </div>
-            )
-          )}
-        </ul>
-      </div>
+      {/* {console.log('data', data)} */}
+      <UncompletedTasks tasks={data} onChangeHandler={onChangeHandler} />
       <CompletedTasks
         tasks={data}
         onChangeHandler={onChangeHandler}
