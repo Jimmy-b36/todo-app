@@ -7,8 +7,9 @@ import { Tasks } from '@prisma/client';
 
 const ListContainer = () => {
   const [data, setData] = useState<Array<Tasks>>([]);
+
   const fetchTodos = async () => {
-    const res = await fetch(`http://localhost:3000/api/todos`);
+    const res = await fetch(`/api/todos`);
     let data: Array<Tasks> = await res.json();
     setData(data);
   };
@@ -17,10 +18,10 @@ const ListContainer = () => {
     fetchTodos();
   }, []);
 
-  const onChangeHandler = async (e: any) => {
+  const onChangeHandler = async (e: React.ChangeEvent) => {
     e.preventDefault();
-    const idData = Number(e.target.value);
-    const completedData = e.target.checked;
+    const idData = Number((e.target as HTMLInputElement).value);
+    const completedData = (e.target as HTMLInputElement).checked;
 
     const res = await fetch(`api/todos`, {
       method: 'PATCH',
