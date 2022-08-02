@@ -57,7 +57,6 @@ const TodoCreator = (props: { fetchTodos: () => void }) => {
           Submit
         </button>
       </form>
-      <div className="flex justify-center"></div>
     </div>
   );
 };
