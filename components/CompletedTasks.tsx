@@ -1,13 +1,20 @@
 import { Tasks } from '@prisma/client';
+import React from 'react';
 import { completedTodos } from '../lib/taskSorter';
+
+interface ICompletedTasksProps {
+  tasks: Array<Tasks>;
+  onChangeHandler: (e: React.ChangeEvent) => {};
+  fetchTodos: () => {};
+}
 
 const CompletedTasks = ({
   tasks,
   onChangeHandler,
   fetchTodos,
-}: Tasks | any) => {
-  const deleteHandler = async (e: any) => {
-    const id = e.target.value;
+}: ICompletedTasksProps) => {
+  const deleteHandler = async (e: React.MouseEvent) => {
+    const id = (e.target as HTMLInputElement).value;
     e.preventDefault();
     await fetch(`api/todos`, {
       method: 'DELETE',
@@ -15,11 +22,12 @@ const CompletedTasks = ({
     });
     fetchTodos();
   };
+
   return (
     <div>
       <div className="flex justify-center">
         <ul>
-          <h1 className="text-4xl">Completed Tasks</h1>
+          <h1 className="text-4xl">Completed Tasks: </h1>
           {completedTodos(tasks)?.map(
             (
               todo: {
@@ -44,8 +52,12 @@ const CompletedTasks = ({
                   id="todoComplete"
                   onChange={onChangeHandler}
                 />
-                <button onClick={deleteHandler} value={todo.id}>
-                  x
+                <button
+                  className="bg-red-300 hover:bg-red-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow m-2"
+                  onClick={deleteHandler}
+                  value={todo.id}
+                >
+                  ❌ <strong>DELETE</strong>
                 </button>
               </div>
             )

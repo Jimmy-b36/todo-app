@@ -1,10 +1,10 @@
 import { Tasks } from '@prisma/client';
 
-const uncompletedTasks = (tasks: Tasks) => {
+const uncompletedTodos = (tasks: Array<Tasks>) => {
   return tasks?.filter((task: Tasks) => !task.completed);
 };
-const completedTodos = (tasks: Tasks) => {
+const completedTodos = (tasks: Array<Tasks>) => {
   return tasks?.filter((task: Tasks) => task.completed);
 };
 
-export { uncompletedTasks, completedTodos };
+export { uncompletedTodos, completedTodos };
