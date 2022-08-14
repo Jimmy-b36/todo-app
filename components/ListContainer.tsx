@@ -2,7 +2,7 @@ import useSWR from 'swr';
 import { Key, useEffect, useState } from 'react';
 import TodoCreator from '../components/TodoCreation';
 import CompletedTasks from '../components/CompletedTasks';
-import UncompletedTasks from './unCompletedTasks';
+import UncompletedTasks from '../components/UncompletedTasks';
 import { Tasks } from '@prisma/client';
 
 const ListContainer = () => {
@@ -36,7 +36,12 @@ const ListContainer = () => {
         <TodoCreator fetchTodos={fetchTodos} />
       </div>
       {/* {console.log('data', data)} */}
-      <UncompletedTasks tasks={data} onChangeHandler={onChangeHandler} />
+      <div className="flex justify-center">
+        <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
+          <UncompletedTasks tasks={data} onChangeHandler={onChangeHandler} />
+        </div>
+      </div>
+
       <CompletedTasks
         tasks={data}
         onChangeHandler={onChangeHandler}
