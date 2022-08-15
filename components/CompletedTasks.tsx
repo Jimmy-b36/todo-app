@@ -25,9 +25,9 @@ const CompletedTasks = ({
 
   return (
     <div>
-      <div className="flex justify-center">
+      <div className="flex justify-between w-full">
         <ul>
-          <h1 className="text-4xl">Completed Tasks: </h1>
+          <h1 className="text-4xl text-black">Completed Tasks: </h1>
           {completedTodos(tasks)?.map(
             (
               todo: {
@@ -38,12 +38,12 @@ const CompletedTasks = ({
               },
               index: number
             ) => (
-              <div key={index} className="flex flex-row">
-                <h2 className="m-2 w-max">
+              <div key={index} className="flex flex-row w-full items-center ">
+                <h2 className="m-2 w-full text-black">
                   {' '}
                   <strong className=" line-through ">{todo.name}</strong>{' '}
                 </h2>
-                <p className="m-2">{todo.description}</p>
+                <p className="m-2 text-black">{todo.description}</p>
                 <input
                   type="checkbox"
                   name="todoComplete"
