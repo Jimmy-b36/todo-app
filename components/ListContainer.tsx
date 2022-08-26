@@ -41,8 +41,8 @@ const ListContainer = () => {
           <UncompletedTasks tasks={data} onChangeHandler={onChangeHandler} />
         </div>
       </div>
-      <div className="flex justify-center w-3/4">
-        <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm w-full justify-center">
+      <div className="flex justify-center">
+        <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm w-full m-2">
           <CompletedTasks
             tasks={data}
             onChangeHandler={onChangeHandler}
