@@ -12,26 +12,24 @@ const UncompletedTasks = ({
   onChangeHandler,
 }: IUncompletedTasksProps) => {
   return (
-    <div className="flex justify-center">
-      <ul className="flex justify-center flex-col">
-        <h1 className="text-4xl flex justify-center text-black">Todo: </h1>
+    <div className="flex justify-center w-full">
+      <ul className="flex flex-col">
+        <h1 className="text-4xl text-center text-black">Todo: </h1>
         {uncompletedTodos(tasks)?.map(
           (
             todo: {
               name: string;
-              description: string;
               id: number;
               completed: boolean;
             },
             index: Key
           ) => (
             <div className="flex justify-center">
-              <div key={index} className="flex flex-row w-3/4">
-                <h2 className="m-2 w-full text-black">
+              <div key={index} className="flex flex-row w-full">
+                <h2 className="w-full m-2 text-black">
                   {' '}
                   <strong>{todo.name}</strong>{' '}
                 </h2>
-                <p className="m-2 text-black">{todo.description}</p>
                 <input
                   type="checkbox"
                   name="todoComplete"

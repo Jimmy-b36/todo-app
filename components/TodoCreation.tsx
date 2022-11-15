@@ -4,26 +4,24 @@ import { useRouter } from 'next/router';
 interface ITodoItem {
   name: string;
   completed: boolean;
-  description: string;
 }
 
 const TodoCreator = (props: { fetchTodos: () => void }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [todo, setTodo] = useState('');
+
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data: ITodoItem = {
-      name: title,
+      name: todo,
       completed: false,
-      description,
     };
     const response = await fetch('/api/todos', {
       method: 'POST',
       body: JSON.stringify(data),
     });
     props.fetchTodos();
-    setTitle('');
-    setDescription('');
+    setTodo('');
+    return;
   };
 
   return (
@@ -34,27 +32,20 @@ const TodoCreator = (props: { fetchTodos: () => void }) => {
         method="post"
         className="flex flex-col"
       >
-        <label htmlFor="title">Title: </label>
+        <label htmlFor="todo">Todo: </label>
         <input
           type="text"
-          name="title"
-          id="title"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
+          name="todo"
+          id="todo"
+          value={todo}
+          onChange={e => setTodo(e.target.value)}
         />
-        <label htmlFor="description">Description: </label>
-        <input
-          type="text"
-          name="description"
-          id="description"
-          value={description}
-          onChange={e => setDescription(e.target.value)}
-        />
+
         <button
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow m-4"
+          className="px-4 py-2 m-4 font-semibold text-gray-800 bg-white border border-gray-400 rounded shadow hover:bg-gray-100"
           type="submit"
         >
-          Submit
+          Create
         </button>
       </form>
     </div>

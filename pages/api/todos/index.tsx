@@ -26,12 +26,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (req.method === 'POST') {
-    const { name, completed, description } = JSON.parse(req.body);
+    const { name, completed } = JSON.parse(req.body);
     const createTodo = await prisma.tasks.create({
       data: {
         name,
         completed,
-        description,
       },
     });
     return res.json(createTodo);

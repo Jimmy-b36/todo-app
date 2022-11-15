@@ -11,13 +11,12 @@ datasource db {
 }
 
 model Tasks {
-  id          Int      @id @unique @default(autoincrement())
-  name        String
-  description String
-  completed   Boolean
-  userId      Int?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
+  id        Int      @id @unique @default(autoincrement())
+  name      String
+  completed Boolean
+  userId    Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
 model Users {

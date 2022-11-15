@@ -5,7 +5,6 @@ const todos: Array<Tasks> = [
   {
     id: 1,
     name: 'test1',
-    description: 'test1',
     completed: false,
     userId: 1,
     createdAt: new Date('2022-08-04T23:13:08.248Z'),
@@ -14,7 +13,6 @@ const todos: Array<Tasks> = [
   {
     id: 2,
     name: 'test2',
-    description: 'test2',
     userId: 1,
     completed: true,
     createdAt: new Date('2022-08-04T23:13:08.248Z'),
@@ -23,7 +21,6 @@ const todos: Array<Tasks> = [
   {
     id: 3,
     name: 'test3',
-    description: 'test3',
     userId: 1,
     completed: false,
     createdAt: new Date('2022-08-04T23:13:08.248Z'),
@@ -32,7 +29,6 @@ const todos: Array<Tasks> = [
   {
     id: 4,
     name: 'test4',
-    description: 'test4',
     userId: 1,
     completed: true,
     createdAt: new Date('2022-08-04T23:13:08.248Z'),
@@ -45,7 +41,6 @@ test('function should filter completed todos', () => {
     {
       id: 1,
       name: 'test1',
-      description: 'test1',
       completed: false,
       userId: 1,
       createdAt: new Date('2022-08-04T23:13:08.248Z'),
@@ -54,7 +49,6 @@ test('function should filter completed todos', () => {
     {
       id: 3,
       name: 'test3',
-      description: 'test3',
       userId: 1,
       completed: false,
       createdAt: new Date('2022-08-04T23:13:08.248Z'),
@@ -65,7 +59,6 @@ test('function should filter completed todos', () => {
     {
       id: 2,
       name: 'test2',
-      description: 'test2',
       userId: 1,
       completed: true,
       createdAt: new Date('2022-08-04T23:13:08.248Z'),
@@ -74,7 +67,6 @@ test('function should filter completed todos', () => {
     {
       id: 4,
       name: 'test4',
-      description: 'test4',
       userId: 1,
       completed: true,
       createdAt: new Date('2022-08-04T23:13:08.248Z'),
@@ -88,7 +80,6 @@ test('function should filter out uncompleted todos', () => {
     {
       id: 2,
       name: 'test2',
-      description: 'test2',
       userId: 1,
       completed: true,
       createdAt: new Date('2022-08-04T23:13:08.248Z'),
@@ -97,7 +88,6 @@ test('function should filter out uncompleted todos', () => {
     {
       id: 4,
       name: 'test4',
-      description: 'test4',
       userId: 1,
       completed: true,
       createdAt: new Date('2022-08-04T23:13:08.248Z'),
@@ -108,7 +98,6 @@ test('function should filter out uncompleted todos', () => {
     {
       id: 1,
       name: 'test1',
-      description: 'test1',
       completed: false,
       userId: 1,
       createdAt: new Date('2022-08-04T23:13:08.248Z'),
@@ -117,7 +106,6 @@ test('function should filter out uncompleted todos', () => {
     {
       id: 3,
       name: 'test3',
-      description: 'test3',
       userId: 1,
       completed: false,
       createdAt: new Date('2022-08-04T23:13:08.248Z'),
