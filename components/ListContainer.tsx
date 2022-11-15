@@ -35,14 +35,13 @@ const ListContainer = () => {
       <div className="flex justify-center m-5">
         <TodoCreator fetchTodos={fetchTodos} />
       </div>
-      {/* {console.log('data', data)} */}
       <div className="flex justify-center">
-        <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
+        <div className="block w-2/3 p-6 bg-white rounded-lg shadow-lg">
           <UncompletedTasks tasks={data} onChangeHandler={onChangeHandler} />
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm w-full m-2">
+        <div className="block w-2/3 p-6 m-2 bg-white rounded-lg shadow-lg">
           <CompletedTasks
             tasks={data}
             onChangeHandler={onChangeHandler}

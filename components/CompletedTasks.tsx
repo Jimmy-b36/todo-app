@@ -25,27 +25,29 @@ const CompletedTasks = ({
 
   return (
     <div>
-      <div className="flex justify-center w-full">
-        <ul>
-          <h1 className="text-4xl text-black">Completed Tasks: </h1>
-
+      <div className="flex flex-col items-center w-full">
+        <h1 className="text-4xl text-black">Completed Tasks: </h1>
+        <ul className="flex flex-col items-center w-full">
           {completedTodos(tasks)?.map(
             (
               todo: {
                 name: string;
-                description: string;
                 id: number;
                 completed: boolean;
               },
               index: number
             ) => (
-              <div key={index} className="flex flex-row items-center  ">
+              <div
+                key={index}
+                className="flex flex-row items-center justify-between w-3/4 "
+              >
                 <h2 className="m-2 text-black">
                   {' '}
-                  <strong className=" line-through ">{todo.name}</strong>{' '}
+                  <strong className="line-through ">{todo.name}</strong>{' '}
                 </h2>
-                <p className="m-2 text-black">{todo.description}</p>
-                <div className="flex justify-end w-full">
+                <div className="flex flex-row items-center justify-center">
+                  <p className="mr-5 text-green-500 fort-bold">Completed!</p>
+                  <p></p>
                   <input
                     type="checkbox"
                     name="todoComplete"
@@ -54,14 +56,13 @@ const CompletedTasks = ({
                     id="todoComplete"
                     onChange={onChangeHandler}
                   />
-                </div>
-                <div className="flex justify-end w-full">
+
                   <button
-                    className="bg-red-300 hover:bg-red-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow m-2 justify-self-end"
+                    className="px-4 py-2 m-2 font-semibold text-gray-800 bg-red-300 border border-gray-400 rounded shadow hover:bg-red-500 justify-self-end"
                     onClick={deleteHandler}
                     value={todo.id}
                   >
-                    ❌ <strong></strong>
+                    ❌ <strong>Remove</strong>
                   </button>
                 </div>
               </div>
