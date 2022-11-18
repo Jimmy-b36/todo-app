@@ -2,7 +2,7 @@ import ListContainer from '../components/ListContainer';
 
 const Home = () => {
   return (
-    <div>
+    <div className="h-screen bg-black">
       <ListContainer />
     </div>
   );
