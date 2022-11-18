@@ -26,7 +26,9 @@ const CompletedTasks = ({
   return (
     <div>
       <div className="flex flex-col items-center w-full">
-        <h1 className="text-4xl text-black">Completed Tasks: </h1>
+        <h1 className="text-4xl font-bold text-center text-black">
+          Completed Tasks:{' '}
+        </h1>
         <ul className="flex flex-col items-center w-full">
           {completedTodos(tasks)?.map(
             (
@@ -39,14 +41,16 @@ const CompletedTasks = ({
             ) => (
               <div
                 key={index}
-                className="flex flex-row items-center justify-between w-3/4 "
+                className="flex flex-row items-center justify-between w-full md:w-3/4 lg:w-3/4 "
               >
-                <h2 className="m-2 text-black">
+                <h2 className="m-2 text-black lg:text-2xl md:text-2xl">
                   {' '}
                   <strong className="line-through ">{todo.name}</strong>{' '}
                 </h2>
                 <div className="flex flex-row items-center justify-center">
-                  <p className="mr-5 text-green-500 fort-bold">Completed!</p>
+                  <p className="hidden mr-5 text-green-500 fort-bold lg:flex md:flex">
+                    Completed!
+                  </p>
                   <p></p>
                   <input
                     type="checkbox"
@@ -55,6 +59,7 @@ const CompletedTasks = ({
                     checked={todo.completed}
                     id="todoComplete"
                     onChange={onChangeHandler}
+                    className=" checkbox-info checkbox checkbox-lg"
                   />
 
                   <button
@@ -62,7 +67,7 @@ const CompletedTasks = ({
                     onClick={deleteHandler}
                     value={todo.id}
                   >
-                    ❌ <strong>Remove</strong>
+                    ❌
                   </button>
                 </div>
               </div>
