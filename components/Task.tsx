@@ -2,7 +2,6 @@ import { Key, useState } from 'react';
 
 interface ITaskProps {
   todo: {
-    createdAt: Date;
     name: string;
     id: number;
     completed: boolean;
