@@ -43,7 +43,6 @@ const Task = ({ todo, index, onChangeHandler, fetchTodos }: ITaskProps) => {
           >
             <strong>{todo.name}</strong>{' '}
           </h2>
-          <p>created at {new Date(todo.createdAt).toLocaleString()}</p>
           <input
             type="checkbox"
             name="todoComplete"
