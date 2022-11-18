@@ -12,13 +12,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.json('deleted');
   }
   if (req.method === 'PATCH') {
-    const { id, completed } = JSON.parse(req.body);
-
+    const { id, completed, name } = JSON.parse(req.body);
     const updateTodo = await prisma.tasks.update({
       where: {
         id: Number(id),
       },
       data: {
+        name: name,
         completed: completed ? true : false,
       },
     });
