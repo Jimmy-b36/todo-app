@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { Key, useEffect, useState } from 'react';
-import TodoCreator from '../components/TodoCreation';
+import TodoCreator from './TodoCreator';
 import CompletedTasks from '../components/CompletedTasks';
 import UncompletedTasks from '../components/UncompletedTasks';
 import { Tasks } from '@prisma/client';
@@ -31,17 +31,25 @@ const ListContainer = () => {
   };
 
   return (
-    <div className="m-5">
-      <div className="flex justify-center m-5">
+    <div className="p-5 bg-black">
+      <p className="pt-10 text-5xl font-bold text-center underline">
+        TODO List
+      </p>
+      <div className="flex items-center justify-center text-center lg:m-5 md:m-5">
         <TodoCreator fetchTodos={fetchTodos} />
       </div>
+      <p className="text-center">(click on a task to edit)</p>
       <div className="flex justify-center">
-        <div className="block w-2/3 p-6 bg-white rounded-lg shadow-lg">
-          <UncompletedTasks tasks={data} onChangeHandler={onChangeHandler} />
+        <div className="block w-4/5 p-6 bg-white rounded-lg shadow-lg lg:w-2/3 md:w-2/3">
+          <UncompletedTasks
+            tasks={data}
+            onChangeHandler={onChangeHandler}
+            fetchTodos={fetchTodos}
+          />
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="block w-2/3 p-6 m-2 bg-white rounded-lg shadow-lg">
+        <div className="block w-4/5 p-6 m-10 bg-white rounded-lg shadow-lg lg:w-2/3 md:w-2/3">
           <CompletedTasks
             tasks={data}
             onChangeHandler={onChangeHandler}
