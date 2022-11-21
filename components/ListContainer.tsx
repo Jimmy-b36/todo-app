@@ -33,7 +33,7 @@ const ListContainer = () => {
   return (
     <div className="p-5 bg-black">
       <p className="pt-10 text-5xl font-bold text-center underline">
-        TODO List
+        TO-DO List
       </p>
       <div className="flex items-center justify-center text-center lg:m-5 md:m-5">
         <TodoCreator fetchTodos={fetchTodos} />

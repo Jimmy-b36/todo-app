@@ -1,4 +1,5 @@
 import { Key, useState } from 'react';
+import { nanoid } from 'nanoid';
 
 interface ITaskProps {
   todo: {
@@ -6,12 +7,12 @@ interface ITaskProps {
     id: number;
     completed: boolean;
   };
-  index: Key;
+
   onChangeHandler: (e: React.ChangeEvent) => void;
   fetchTodos: () => void;
 }
 
-const Task = ({ todo, index, onChangeHandler, fetchTodos }: ITaskProps) => {
+const Task = ({ todo, onChangeHandler, fetchTodos }: ITaskProps) => {
   const [editing, setEditing] = useState<boolean>(false);
   const [editValue, setEditValue] = useState<string>('');
 
@@ -30,10 +31,7 @@ const Task = ({ todo, index, onChangeHandler, fetchTodos }: ITaskProps) => {
   return (
     <>
       {!editing ? (
-        <div
-          key={index}
-          className="flex flex-row items-center justify-between w-full md:w-3/4 lg:w-3/4"
-        >
+        <li className="flex flex-row items-center justify-between w-full md:w-3/4 lg:w-3/4">
           <h2
             className="w-full m-2 text-black md:text-2xl lg:text-2xl hover:cursor-pointer"
             onClick={() => {
@@ -50,9 +48,9 @@ const Task = ({ todo, index, onChangeHandler, fetchTodos }: ITaskProps) => {
             value={todo.id}
             id="todoComplete"
             onChange={onChangeHandler}
-            className="checkbox checkbox-lg"
+            className="bg-gray-200 checkbox checkbox-lg"
           />
-        </div>
+        </li>
       ) : (
         <form
           action=""
@@ -60,7 +58,7 @@ const Task = ({ todo, index, onChangeHandler, fetchTodos }: ITaskProps) => {
           className="flex flex-col"
           id={todo.id.toString()}
         >
-          <label htmlFor="todo">Todo: </label>
+          <label htmlFor="todo">To-do: </label>
           <input
             type="text"
             name="todo"

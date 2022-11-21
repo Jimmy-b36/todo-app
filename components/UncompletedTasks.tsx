@@ -1,7 +1,8 @@
 import { Tasks } from '@prisma/client';
-import React, { Key, useState } from 'react';
+import React, { Key } from 'react';
 import { uncompletedTodos } from '../lib/taskSorter';
 import Task from './Task';
+import { nanoid } from 'nanoid';
 
 interface IUncompletedTasksProps {
   tasks: Array<Tasks>;
@@ -16,20 +17,15 @@ const UncompletedTasks = ({
 }: IUncompletedTasksProps) => {
   return (
     <div className="flex flex-col w-full">
-      <h1 className="mb-3 text-5xl font-bold text-center text-black">Todo: </h1>
+      <h1 className="mb-3 text-5xl font-bold text-center text-black">
+        To-do:{' '}
+      </h1>
       <ul className="flex flex-col items-center w-full">
         {uncompletedTodos(tasks)?.map(
-          (
-            todo: {
-              name: string;
-              id: number;
-              completed: boolean;
-            },
-            index: Key
-          ) => (
+          (todo: { name: string; id: number; completed: boolean }) => (
             <Task
+              key={nanoid()}
               todo={todo}
-              index={index}
               onChangeHandler={onChangeHandler}
               fetchTodos={fetchTodos}
             />
